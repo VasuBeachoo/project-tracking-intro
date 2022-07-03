@@ -1,0 +1,69 @@
+///////////////////////////////////////
+// IMPORTS ////////////////////////////
+
+///////////////////////////////////////
+// VARIABLES //////////////////////////
+
+///////////////////////////////////////
+// MIXINS /////////////////////////////
+
+@mixin flex($direction, $justify, $align) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin section() {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+///////////////////////////////////////
+// FUNCTIONS //////////////////////////
+
+///////////////////////////////////////
+// STYLES /////////////////////////////
+
+body {
+  margin: 0;
+}
+
+.page-container {
+  @include flex(row, center, center);
+  min-height: 100vh;
+}
+
+.page {
+  @include flex(column, flex-start, center);
+}
+
+.header {
+  @include flex(row, space-between, center);
+  @include section();
+
+  &__links {
+    @include flex(row, space-around, center);
+  }
+}
+
+.intro {
+  @include flex(row, flex-start, flex-start);
+  @include section();
+
+  &__text-container {
+    @include flex(column, flex-start, flex-start);
+  }
+
+  &__tag-container {
+    @include flex(row, flex-start, center);
+  }
+
+  &__btn-container {
+    @include flex(row, flex-start, center);
+  }
+
+  &__img-container {
+    @include flex(column, flex-start, flex-start);
+  }
+}

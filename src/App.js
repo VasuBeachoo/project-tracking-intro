@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Link from "./components/Link";
 import introImg from "./assets/illustration-devices.svg";
+import "./css/style.css";
 
 const App = () => {
   const navLinks = [
@@ -34,7 +35,7 @@ const App = () => {
         <Header navLinks={renderLinks("header", navLinks)} />
         <section className="intro">
           <div className="intro__text-container">
-            <div className="intro__container">
+            <div className="intro__tag-container">
               <p className="intro__new-tag">NEW</p>
               <p className="intro__light-paragraph">MONOGRAPH DASHBOARD</p>
             </div>
