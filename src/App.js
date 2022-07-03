@@ -4,29 +4,43 @@ import introImg from "./assets/illustration-devices.svg";
 import "./css/style.css";
 
 const App = () => {
+  const CIRCLE_TYPE = "circle";
+  const BLACK_COLOR = "black";
+  const GREY_COLOR = "grey";
+
   const navLinks = [
     {
       text: "PRODUCT",
-      color: "black",
+      color: BLACK_COLOR,
     },
     {
       text: "FEATURES",
-      color: "black",
+      color: BLACK_COLOR,
     },
     {
       text: "PRICING",
-      color: "black",
+      color: BLACK_COLOR,
+    },
+    {
+      type: CIRCLE_TYPE,
     },
     {
       text: "LOGIN",
-      color: "grey",
+      color: GREY_COLOR,
     },
   ];
 
   function renderLinks(block, links) {
-    return links.map((link) => (
-      <Link block={block} text={link.text} color={link.color} />
-    ));
+    return links.map((link) => {
+      if (link.type) {
+        if (link.type === CIRCLE_TYPE) {
+          return <div className={`${block}__circle`}></div>;
+        }
+      } else {
+        return <Link block={block} text={link.text} color={link.color} />;
+      }
+      return <div></div>;
+    });
   }
 
   return (

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow&family=Barlow+Condensed:wght@400;700&display=swap");
 body {
   margin: 0;
 }
@@ -13,9 +14,9 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   min-height: 100vh;
 }
 
@@ -52,6 +53,11 @@ body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
+  padding: 60px 100px;
+}
+
+.header__logo {
+  width: 40px;
 }
 
 .header__links {
@@ -62,11 +68,43 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 360px;
+}
+
+.header__link {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 17.5px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  margin: 0;
+}
+
+.header__link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.header__link--black {
+  color: #242942;
+}
+
+.header__link--grey {
+  color: #a0a1ac;
+}
+
+.header__circle {
+  width: 5px;
+  height: 5px;
+  background-color: #a0a1ac;
+  border: none;
+  border-radius: 100%;
+  opacity: 0.5;
 }
 
 .intro {
@@ -86,6 +124,7 @@ body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
+  padding: 0 0 0 100px;
 }
 
 .intro__text-container {
@@ -120,6 +159,30 @@ body {
           align-items: center;
 }
 
+.intro__light-paragraph {
+  font-family: "Barlow", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #a0a1ac;
+  margin: 0;
+}
+
+.intro__heading {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: colr(Very-Dark-Blue);
+  margin: 0;
+}
+
+.intro__paragraph {
+  font-family: "Barlow", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #5b5f71;
+  margin: 0;
+}
+
 .intro__btn-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -134,6 +197,11 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.intro__btn {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 400;
 }
 
 .intro__img-container {

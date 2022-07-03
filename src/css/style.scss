@@ -1,8 +1,23 @@
 ///////////////////////////////////////
 // IMPORTS ////////////////////////////
 
+@import url("https://fonts.googleapis.com/css2?family=Barlow&family=Barlow+Condensed:wght@400;700&display=swap");
+
 ///////////////////////////////////////
 // VARIABLES //////////////////////////
+
+$colors: (
+  Red: hsl(0, 100%, 68%),
+  Very-Dark-Blue: hsl(230, 29%, 20%),
+  Dark-Grayish-Blue: hsl(230, 11%, 40%),
+  Grayish-Blue: hsl(231, 7%, 65%),
+  Light-Grayish-Blue: hsl(207, 33%, 95%),
+);
+
+$heading-font: "Barlow Condensed", sans-serif;
+$body-font: "Barlow", sans-serif;
+
+$page-padding: 100px;
 
 ///////////////////////////////////////
 // MIXINS /////////////////////////////
@@ -19,8 +34,71 @@
   width: 100%;
 }
 
+@mixin link($font-size: 16px) {
+  font-family: $heading-font;
+  font-size: $font-size;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  margin: 0;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  &--black {
+    color: color(Very-Dark-Blue);
+  }
+
+  &--grey {
+    color: color(Grayish-Blue);
+  }
+}
+
+@mixin circle($size, $color) {
+  width: $size;
+  height: $size;
+  background-color: $color;
+  border: none;
+  border-radius: 100%;
+  opacity: 0.5;
+}
+
+@mixin light-paragraph($font-size: 16px) {
+  font-family: $body-font;
+  font-size: $font-size;
+  font-weight: 400;
+  color: color(Grayish-Blue);
+  margin: 0;
+}
+
+@mixin heading($font-size: 32px) {
+  font-family: $heading-font;
+  font-size: $font-size;
+  font-weight: 700;
+  color: colr(Very-Dark-Blue);
+  margin: 0;
+}
+
+@mixin paragraph($font-size: 16px) {
+  font-family: $body-font;
+  font-size: $font-size;
+  font-weight: 400;
+  color: color(Dark-Grayish-Blue);
+  margin: 0;
+}
+
+@mixin btn() {
+  font-family: $heading-font;
+  font-weight: 400;
+}
+
 ///////////////////////////////////////
 // FUNCTIONS //////////////////////////
+
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
 
 ///////////////////////////////////////
 // STYLES /////////////////////////////
@@ -30,7 +108,7 @@ body {
 }
 
 .page-container {
-  @include flex(row, center, center);
+  @include flex(row, center, flex-start);
   min-height: 100vh;
 }
 
@@ -41,15 +119,30 @@ body {
 .header {
   @include flex(row, space-between, center);
   @include section();
+  padding: 60px $page-padding;
+
+  &__logo {
+    width: 40px;
+  }
 
   &__links {
-    @include flex(row, space-around, center);
+    @include flex(row, space-between, center);
+    width: 360px;
+  }
+
+  &__link {
+    @include link(17.5px);
+  }
+
+  &__circle {
+    @include circle(5px, color(Grayish-Blue));
   }
 }
 
 .intro {
   @include flex(row, flex-start, flex-start);
   @include section();
+  padding: 0 0 0 $page-padding;
 
   &__text-container {
     @include flex(column, flex-start, flex-start);
@@ -59,8 +152,24 @@ body {
     @include flex(row, flex-start, center);
   }
 
+  &__light-paragraph {
+    @include light-paragraph();
+  }
+
+  &__heading {
+    @include heading();
+  }
+
+  &__paragraph {
+    @include paragraph();
+  }
+
   &__btn-container {
     @include flex(row, flex-start, center);
+  }
+
+  &__btn {
+    @include btn();
   }
 
   &__img-container {
