@@ -12,6 +12,7 @@ $colors: (
   Dark-Grayish-Blue: hsl(230, 11%, 40%),
   Grayish-Blue: hsl(231, 7%, 65%),
   Light-Grayish-Blue: hsl(207, 33%, 95%),
+  White: hsl(0, 0%, 100%),
 );
 
 $heading-font: "Barlow Condensed", sans-serif;
@@ -35,10 +36,11 @@ $page-padding: 100px;
 }
 
 @mixin link($font-size: 16px) {
+  user-select: none;
   font-family: $heading-font;
   font-size: $font-size;
   font-weight: 700;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.4px;
   margin: 0;
 
   &:hover {
@@ -64,33 +66,66 @@ $page-padding: 100px;
   opacity: 0.5;
 }
 
-@mixin light-paragraph($font-size: 16px) {
+@mixin tag($font-size, $bg-color, $color) {
+  text-align: center;
+  background-color: $bg-color;
+  color: $color;
+  font-family: $heading-font;
+  font-size: $font-size;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 30px;
+  padding: 4px 10px;
+  margin: 0;
+}
+
+@mixin light-paragraph($font-size: 14px) {
+  color: color(Grayish-Blue);
   font-family: $body-font;
   font-size: $font-size;
   font-weight: 400;
-  color: color(Grayish-Blue);
+  letter-spacing: 3px;
   margin: 0;
 }
 
 @mixin heading($font-size: 32px) {
+  color: colr(Very-Dark-Blue);
   font-family: $heading-font;
   font-size: $font-size;
   font-weight: 700;
-  color: colr(Very-Dark-Blue);
+  line-height: $font-size;
   margin: 0;
 }
 
 @mixin paragraph($font-size: 16px) {
+  color: color(Dark-Grayish-Blue);
   font-family: $body-font;
   font-size: $font-size;
   font-weight: 400;
-  color: color(Dark-Grayish-Blue);
+  letter-spacing: 0.2px;
+  line-height: $font-size * 1.6;
   margin: 0;
 }
 
 @mixin btn() {
+  all: unset;
+  text-align: center;
+  background-color: color(Red);
+  color: color(Light-Grayish-Blue);
   font-family: $heading-font;
-  font-weight: 400;
+  font-size: 16.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 25px;
+  transition: 0.25s;
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(1.5);
+  }
 }
 
 ///////////////////////////////////////
@@ -114,20 +149,22 @@ body {
 
 .page {
   @include flex(column, flex-start, center);
+  width: 100%;
 }
 
 .header {
   @include flex(row, space-between, center);
   @include section();
-  padding: 60px $page-padding;
+  padding: 55px $page-padding 0;
+  margin: 0 0 75px 0;
 
   &__logo {
-    width: 40px;
+    width: 31px;
   }
 
   &__links {
     @include flex(row, space-between, center);
-    width: 360px;
+    width: 375px;
   }
 
   &__link {
@@ -140,28 +177,38 @@ body {
 }
 
 .intro {
-  @include flex(row, flex-start, flex-start);
+  @include flex(row, flex-start, center);
   @include section();
   padding: 0 0 0 $page-padding;
+  margin: 0 0 70px 0;
 
   &__text-container {
     @include flex(column, flex-start, flex-start);
+    max-width: 400px;
   }
 
   &__tag-container {
     @include flex(row, flex-start, center);
+    margin: 0 0 12px 0;
+  }
+
+  &__tag {
+    @include tag(15px, color(Very-Dark-Blue), color(White));
+    margin: 0 15px 0 0;
   }
 
   &__light-paragraph {
-    @include light-paragraph();
+    @include light-paragraph(13.5px);
   }
 
   &__heading {
-    @include heading();
+    @include heading(54px);
   }
 
   &__paragraph {
-    @include paragraph();
+    @include paragraph(17px);
+    max-width: 270px;
+    margin: 25px 0 40px;
   }
 
   &__btn-container {
@@ -170,9 +217,29 @@ body {
 
   &__btn {
     @include btn();
+    margin: 0 15px 0 0;
   }
 
   &__img-container {
     @include flex(column, flex-start, flex-start);
+    overflow: hidden;
+    margin: 0 0 0 8vw;
   }
+
+  &__img {
+    width: 65vw;
+    min-height: 60vh;
+  }
+}
+
+.bg-pattern {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 53vw;
+  height: 60vh;
+  background-color: color(Light-Grayish-Blue);
+  border: none;
+  border-radius: 0 0 0 2em;
+  z-index: -1;
 }

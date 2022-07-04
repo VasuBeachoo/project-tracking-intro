@@ -4,6 +4,7 @@ import introImg from "./assets/illustration-devices.svg";
 import "./css/style.css";
 
 const App = () => {
+  let key = 0;
   const CIRCLE_TYPE = "circle";
   const BLACK_COLOR = "black";
   const GREY_COLOR = "grey";
@@ -34,10 +35,12 @@ const App = () => {
     return links.map((link) => {
       if (link.type) {
         if (link.type === CIRCLE_TYPE) {
-          return <div className={`${block}__circle`}></div>;
+          return <div key={key++} className={`${block}__circle`}></div>;
         }
       } else {
-        return <Link block={block} text={link.text} color={link.color} />;
+        return (
+          <Link key={key++} block={block} text={link.text} color={link.color} />
+        );
       }
       return <div></div>;
     });
@@ -50,7 +53,7 @@ const App = () => {
         <section className="intro">
           <div className="intro__text-container">
             <div className="intro__tag-container">
-              <p className="intro__new-tag">NEW</p>
+              <p className="intro__tag">NEW</p>
               <p className="intro__light-paragraph">MONOGRAPH DASHBOARD</p>
             </div>
             <h1 className="intro__heading">POWERFUL INSIGHTS INTO YOUR TEAM</h1>
@@ -66,6 +69,7 @@ const App = () => {
             <img src={introImg} alt="intro-devices" className="intro__img" />
           </div>
         </section>
+        <div className="bg-pattern"></div>
       </div>
     </div>
   );
