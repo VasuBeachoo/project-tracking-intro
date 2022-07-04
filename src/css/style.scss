@@ -18,7 +18,10 @@ $colors: (
 $heading-font: "Barlow Condensed", sans-serif;
 $body-font: "Barlow", sans-serif;
 
-$page-padding: 100px;
+$desktop-padding: 100px;
+$mobile-padding: 40px;
+
+$mobile-width: 950px;
 
 ///////////////////////////////////////
 // MIXINS /////////////////////////////
@@ -128,6 +131,24 @@ $page-padding: 100px;
   }
 }
 
+@mixin menu-icon() {
+  display: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @include mobile() {
+    display: block;
+  }
+}
+
+@mixin mobile() {
+  @media (max-width: $mobile-width) {
+    @content;
+  }
+}
+
 ///////////////////////////////////////
 // FUNCTIONS //////////////////////////
 
@@ -145,6 +166,7 @@ body {
 .page-container {
   @include flex(row, center, flex-start);
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .page {
@@ -155,11 +177,19 @@ body {
 .header {
   @include flex(row, space-between, center);
   @include section();
-  padding: 55px $page-padding 0;
+  padding: 55px $desktop-padding 0;
   margin: 0 0 75px 0;
 
   &__logo {
     width: 31px;
+  }
+
+  &__menu-open {
+    @include menu-icon();
+  }
+
+  &__menu-close {
+    @include menu-icon();
   }
 
   &__links {
@@ -171,15 +201,38 @@ body {
     @include link(17.5px);
   }
 
-  &__circle {
+  &__divider {
     @include circle(5px, color(Grayish-Blue));
+  }
+}
+
+.menu {
+  @include flex(column, space-around, center);
+  position: absolute;
+  top: 20%;
+  width: 80%;
+  height: 200px;
+  background-color: color(White);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 25px 0;
+  z-index: 2;
+
+  &__link {
+    @include link(20px);
+  }
+
+  &__divider {
+    width: 90%;
+    height: 2px;
+    background-color: color(Grayish-Blue);
+    opacity: 0.25;
   }
 }
 
 .intro {
   @include flex(row, flex-start, center);
   @include section();
-  padding: 0 0 0 $page-padding;
+  padding: 0 0 0 $desktop-padding;
   margin: 0 0 70px 0;
 
   &__text-container {
@@ -242,4 +295,35 @@ body {
   border: none;
   border-radius: 0 0 0 2em;
   z-index: -1;
+}
+
+@include mobile() {
+  .header {
+    padding: $mobile-padding $mobile-padding 0 $mobile-padding;
+
+    &__links {
+      display: none;
+    }
+  }
+
+  .intro {
+    @include flex(column-reverse, flex-start, center);
+    padding: 0 0 0 $mobile-padding;
+    margin: 0 0 $mobile-padding + 10px 0;
+
+    &__img-container {
+      padding: 0 0 0 20vw;
+      margin: 0 0 90px 0;
+    }
+
+    &__img {
+      min-width: 120vw;
+      min-height: 50vh;
+      max-height: 60vh;
+    }
+  }
+
+  .bg-pattern {
+    height: 95vh;
+  }
 }

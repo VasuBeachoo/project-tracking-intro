@@ -1,13 +1,16 @@
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Link from "./components/Link";
+import Button from "./components/Button";
 import introImg from "./assets/illustration-devices.svg";
 import "./css/style.css";
 
 const App = () => {
   let key = 0;
-  const CIRCLE_TYPE = "circle";
+  const DIVIDER_TYPE = "divider";
   const BLACK_COLOR = "black";
   const GREY_COLOR = "grey";
+  const mobileWidth = 950;
 
   const navLinks = [
     {
@@ -23,7 +26,7 @@ const App = () => {
       color: BLACK_COLOR,
     },
     {
-      type: CIRCLE_TYPE,
+      type: DIVIDER_TYPE,
     },
     {
       text: "LOGIN",
@@ -31,11 +34,22 @@ const App = () => {
     },
   ];
 
+  const [menu, setMenu] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("resize", resizeWindow);
+    return () => window.removeEventListener("resize", resizeWindow);
+  });
+
+  function resizeWindow() {
+    if (window.innerWidth > mobileWidth) setMenu(false);
+  }
+
   function renderLinks(block, links) {
     return links.map((link) => {
       if (link.type) {
-        if (link.type === CIRCLE_TYPE) {
-          return <div key={key++} className={`${block}__circle`}></div>;
+        if (link.type === DIVIDER_TYPE) {
+          return <div key={key++} className={`${block}__divider`}></div>;
         }
       } else {
         return (
@@ -49,7 +63,14 @@ const App = () => {
   return (
     <div className="page-container">
       <div className="page">
-        <Header navLinks={renderLinks("header", navLinks)} />
+        <Header
+          navLinks={renderLinks("header", navLinks)}
+          menu={menu}
+          setMenu={setMenu}
+        />
+        {menu && (
+          <section className="menu">{renderLinks("menu", navLinks)}</section>
+        )}
         <section className="intro">
           <div className="intro__text-container">
             <div className="intro__tag-container">
@@ -61,7 +82,7 @@ const App = () => {
               Project planning and time tracking for agile teams
             </p>
             <div className="intro__btn-container">
-              <button className="intro__btn">SCHEDULE A DEMO</button>
+              <Button block="intro" text="SCHEDULE A DEMO" />
               <p className="intro__light-paragraph">TO SEE A PREVIEW</p>
             </div>
           </div>
