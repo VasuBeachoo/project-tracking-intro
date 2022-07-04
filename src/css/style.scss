@@ -93,7 +93,7 @@ $mobile-width: 950px;
 }
 
 @mixin heading($font-size: 32px) {
-  color: colr(Very-Dark-Blue);
+  color: color(Very-Dark-Blue);
   font-family: $heading-font;
   font-size: $font-size;
   font-weight: 700;
